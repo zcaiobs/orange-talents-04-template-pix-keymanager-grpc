@@ -24,8 +24,8 @@ message KeyManagerRequest {
   }
 
   enum Account {
-    CONTA_CORRENTE = 0;
-    CONTA_POUPANCA = 1;
+      CONTA_CORRENTE = 0;
+      CONTA_POUPANCA = 1;
   }
 }
 

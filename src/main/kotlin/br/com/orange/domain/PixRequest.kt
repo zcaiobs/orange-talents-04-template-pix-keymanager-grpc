@@ -2,7 +2,6 @@ package br.com.orange.domain
 
 import br.com.orange.KeyManagerRequest
 
-
 class PixRequest() {
     var keyType: String = ""
     var key: String = ""
@@ -13,20 +12,27 @@ class PixRequest() {
         this.keyType = request.keyType.name
         this.key = request.keyValue
         this.bankAccount = clienteRequest.instituicao?.let {
-            BankAccount(it.ispb, clienteRequest.agencia, clienteRequest.numero, clienteRequest.tipo) }
+            BankAccount(it.ispb, clienteRequest.agencia, clienteRequest.numero, BankAccount.AccountType.valueOf(request.accountType.name)) }
         this.owner = clienteRequest.titular?.let { Owner(it.nome, it.cpf) }
     }
 
-    class BankAccount(var participant: String, var branch: String, var accountNumber: String, var accountType: String) {
+    class BankAccount(var participant: String, var branch: String, var accountNumber: String, accountType: AccountType) {
+        var accountType: String = accountType.type
+
+        enum class AccountType(var type: String) {
+            CONTA_CORRENTE("CACC"),
+            CONTA_POUPANCA("SVGS")
+        }
+
         override fun toString(): String {
             return "BankAccount(participant='$participant', branch='$branch', accountNumber='$accountNumber', accountType='$accountType')"
         }
     }
 
     class Owner(var name: String, var taxIdNumber: String) {
-        val type: Type = Type.NATURAL_PERSON
+        val type: PersonType = PersonType.NATURAL_PERSON
 
-        enum class Type {
+        enum class PersonType {
             NATURAL_PERSON,
             LEGAL_PERSON
         }
@@ -39,6 +45,4 @@ class PixRequest() {
     override fun toString(): String {
         return "PixRequest(keyType='$keyType', key='$key', bankAccount=$bankAccount, owner=$owner)"
     }
-
-
 }
