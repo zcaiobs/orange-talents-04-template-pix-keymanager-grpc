@@ -7,11 +7,26 @@ option java_outer_classname = "KeyManager";
 package br.com.orange;
 
 service KeyManagerService {
-  rpc send (KeyManagerRequest) returns (KeyManagerReply) {}
+  rpc register (KeyManagerRequest) returns (KeyManagerReply) {}
 }
 
 message KeyManagerRequest {
-  string name = 1;
+  string clientId = 1;
+  Key keyType = 2;
+  string keyValue = 3;
+  Account accountType = 4;
+
+  enum Key {
+    CPF = 0;
+    PHONE = 1;
+    EMAIL = 2;
+    RANDOM = 3;
+  }
+
+  enum Account {
+    CONTA_CORRENTE = 0;
+    CONTA_POUPANCA = 1;
+  }
 }
 
 message KeyManagerReply {
