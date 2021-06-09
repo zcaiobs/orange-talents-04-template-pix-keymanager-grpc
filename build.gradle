@@ -23,6 +23,9 @@ micronaut {
 }
 
 dependencies {
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa:2.4.3")
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari:3.4.0")
+    implementation("mysql:mysql-connector-java:8.0.25")
     implementation("io.micronaut.xml:micronaut-jackson-xml:2.3.0")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-runtime")

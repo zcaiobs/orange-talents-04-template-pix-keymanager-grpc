@@ -4,7 +4,20 @@ services:
     image: "public.ecr.aws/d8b2x5c9/orange-stack-sat-bcb-pix"
     ports:
       - 8082:8082
+
   erp-itau:
     image: "public.ecr.aws/d8b2x5c9/orange-stack-sat-itau-erp"
     ports:
       - 9091:9091
+
+  mysql:
+    image: mysql
+    container_name: mysql-keymanager
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - keymanager_db:/var/lib/mysql
+volumes:
+  keymanager_db:

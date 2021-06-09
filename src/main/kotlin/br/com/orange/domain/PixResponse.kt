@@ -21,6 +21,10 @@ class PixResponse {
             SVGS("CONTA_POUPANCA")
         }
 
+        fun toBank(): Pix.BankAccount {
+            return Pix.BankAccount(this.participant, this.branch, this.accountNumber, this.accountType)
+        }
+
         override fun toString(): String {
             return "BankAccount(participant='$participant', branch='$branch', accountNumber='$accountNumber', accountType='$accountType')"
         }
@@ -34,6 +38,10 @@ class PixResponse {
             LEGAL_PERSON
         }
 
+        fun toOwner(): Pix.Owner {
+            return Pix.Owner(this.name, this.taxIdNumber)
+        }
+
         override fun toString(): String {
             return "Owner(name='$name', taxIdNumber='$taxIdNumber', type=$type)"
         }
@@ -44,5 +52,7 @@ class PixResponse {
                 "owner='$owner', createdAt=$createdAt)"
     }
 
-
+    fun toPix(): Pix {
+        return Pix(this.keyType!!.name, this.key, this.bankAccount!!.toBank(), this.owner!!.toOwner(), this.createdAt)
+    }
 }
