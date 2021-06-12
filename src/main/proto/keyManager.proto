@@ -6,8 +6,71 @@ option java_outer_classname = "KeyManager";
 
 package br.com.orange;
 
-service KeyManagerService {
-  rpc register (KeyManagerRequest) returns (KeyManagerReply) {}
+service KeyManagerRegisterService {
+  rpc register (KeyManagerRequest) returns (KeyManagerReply) {};
+}
+
+service KeyManagerRemoveService {
+  rpc remove (KeyManagerRemoveRequest) returns (KeyManagerRemoveReply) {};
+}
+
+service KeyManagerFindService {
+  rpc find (KeyManagerFindRequest) returns (KeyManagerFindReply) {};
+}
+
+message KeyManagerFindRequest {
+  message KeyManagerFind {
+    string clientId = 1;
+    string idPix = 2;
+  }
+  oneof filtro {
+    KeyManagerFind keymanagerFind = 1;
+    string keyValue = 2;
+  }
+}
+
+message KeyManagerFindReply {
+  string idPix = 2;
+  string clientId = 1;
+  Key keyType = 3;
+  string keyValue = 4;
+  Titular titular = 5;
+  InstituicaoFinanceira conta = 6;
+  string criadoEm = 7;
+
+  message InstituicaoFinanceira {
+    string nome = 1;
+    string agencia = 2;
+    string conta = 3;
+    Account tipo = 4;
+
+    enum Account {
+      CONTA_CORRENTE = 0;
+      CONTA_POUPANCA = 1;
+    }
+  }
+
+  message Titular {
+    string name = 1;
+    string cpf = 2;
+  }
+
+  enum Key {
+    CPF = 0;
+    PHONE = 1;
+    EMAIL = 2;
+    RANDOM = 3;
+  }
+
+}
+
+message KeyManagerRemoveRequest {
+  string clientId = 1;
+  string idPix = 2;
+}
+
+message KeyManagerRemoveReply {
+  string message = 1;
 }
 
 message KeyManagerRequest {
@@ -31,4 +94,5 @@ message KeyManagerRequest {
 
 message KeyManagerReply {
   string message = 1;
+  string idPix = 2;
 }

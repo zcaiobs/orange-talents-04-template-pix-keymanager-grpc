@@ -6,4 +6,5 @@ import io.micronaut.data.jpa.repository.JpaRepository
 
 @Repository
 interface PixRepository: JpaRepository<Pix, String> {
+    fun existsByKeyvalue(key: String): Boolean
 }
