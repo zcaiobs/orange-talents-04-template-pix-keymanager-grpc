@@ -9,5 +9,5 @@ import io.micronaut.http.client.annotation.Client
 @Client("http://localhost:9091/api/v1/clientes/")
 interface LegacyService {
     @Get("/{id}/contas")
-    fun findClientById(@PathVariable id: String, @QueryValue tipo: String): ClienteRequest
+    fun findClientById(@PathVariable id: String, @QueryValue tipo: String?): ClienteRequest
 }

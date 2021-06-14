@@ -8,6 +8,10 @@ import io.micronaut.http.client.annotation.Client
 
 @Client("http://localhost:8082/api/v1/pix/keys")
 interface ExternalService {
+
+    @Get("/{key}", produces = ["application/xml"], consumes = ["application/json"])
+    fun findKey(@PathVariable key: String): Any
+
     @Post(produces = ["application/xml"], consumes = ["application/json"])
     fun createNewKey(@Body pixRequest: PixRequest): PixResponse
 

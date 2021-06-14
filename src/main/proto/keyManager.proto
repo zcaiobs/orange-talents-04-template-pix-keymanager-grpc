@@ -18,6 +18,35 @@ service KeyManagerFindService {
   rpc find (KeyManagerFindRequest) returns (KeyManagerFindReply) {};
 }
 
+service KeyManagerFindAllService {
+  rpc findAll (KeyManagerFindAllRequest) returns (KeyManagerFindAllReply) {};
+}
+
+message KeyManagerFindAllRequest {
+  string clienteId = 1;
+}
+
+message KeyManagerFindAllReply {
+  string pixId = 1;
+  Key keyType = 2;
+  string keyValue = 3;
+  Account conta = 4;
+  string created = 5;
+
+
+  enum Account {
+    CONTA_CORRENTE = 0;
+    CONTA_POUPANCA = 1;
+  }
+
+  enum Key {
+    CPF = 0;
+    PHONE = 1;
+    EMAIL = 2;
+    RANDOM = 3;
+  }
+}
+
 message KeyManagerFindRequest {
   message KeyManagerFind {
     string clientId = 1;

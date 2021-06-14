@@ -33,13 +33,15 @@ class Pix() {
 
     @Embeddable
     class BankAccount() {
+        var clienteId: String? = null
         var nameBank: String? = null
         var accountType: String? = null
         var participant: String? = null
         var branch: String? = null
         var accountNumber: String? = null
 
-        constructor(name: String, participant: String, branch: String, accountNumber: String, accountType: String) : this() {
+        constructor(clienteId: String ,name: String, participant: String, branch: String, accountNumber: String, accountType: String) : this() {
+            this.clienteId = clienteId
             this.nameBank = name
             this.accountType = accountType
             this.participant = participant
