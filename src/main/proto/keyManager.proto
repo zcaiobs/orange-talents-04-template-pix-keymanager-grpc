@@ -27,11 +27,18 @@ message KeyManagerFindAllRequest {
 }
 
 message KeyManagerFindAllReply {
-  string pixId = 1;
-  Key keyType = 2;
-  string keyValue = 3;
-  Account conta = 4;
-  string created = 5;
+
+  string clienteId = 1;
+  repeated ListaDeChaves chaves = 2;
+
+  message ListaDeChaves {
+    string pixId = 1;
+    Key keyType = 2;
+    string keyValue = 3;
+    Account conta = 4;
+    string created = 5;
+  }
+
 
 
   enum Account {

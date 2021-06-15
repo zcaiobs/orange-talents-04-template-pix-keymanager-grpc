@@ -11,6 +11,8 @@ import java.util.*
 
 @Repository
 interface PixRepository: JpaRepository<Pix, String> {
+    @Query("select p from Pix p where p.bankAccount.clienteId = :clienteId")
+    fun listarChave(clienteId: String): List<Pix>
     @Query("select p from Pix p where p.id = :id and p.bankAccount.clienteId = :cliente")
     fun findPix(id: String, cliente: String): Optional<Pix>
     fun existsByKeyvalue(key: String): Boolean
