@@ -106,7 +106,7 @@ message KeyManagerRemoveRequest {
 }
 
 message KeyManagerRemoveReply {
-  string message = 1;
+  string deletedAt = 1;
 }
 
 message KeyManagerRequest {

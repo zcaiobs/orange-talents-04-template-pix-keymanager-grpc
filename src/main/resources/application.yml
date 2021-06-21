@@ -16,3 +16,7 @@ jpa:
         hbm2ddl:
           auto: update
         show_sql: true
+
+grpc:
+  server:
+    port: 50052

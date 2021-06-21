@@ -1,11 +1,10 @@
 package br.com.orange.validator
 
 import br.com.orange.KeyManagerRequest
-import br.com.orange.repository.PixRepository
 import io.micronaut.context.annotation.Context
 
 @Context
-class PixValidator(val pixRepository: PixRepository) {
+class PixValidator {
     fun isValid(request: KeyManagerRequest?): Boolean {
         val regexCPF = "^[0-9]{11}$".toRegex()
         val regexPHONE = "^\\+[1-9][0-9]\\d{1,14}$".toRegex()
