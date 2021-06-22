@@ -1,3 +1,6 @@
 package br.com.orange.domain
 
-class RemoveResponse(val key: String, val participant: String, val deletedAt: String)
+import io.micronaut.core.annotation.Introspected
+
+@Introspected
+data class RemoveResponse(val key: String, val participant: String, val deletedAt: String)
