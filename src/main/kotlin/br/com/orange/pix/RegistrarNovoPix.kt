@@ -28,7 +28,7 @@ class RegistrarNovoPix(
         if (pixValidator.isValid(request)) {
             if(!pixRepository.existsByKeyvalue(request!!.keyValue)) {
                 val step1 = legacyService.findClientById(request.clientId, request.accountType.name)
-                val step2 = externalService.createNewKey(PixRequest(step1, request))
+                val step2 = externalService.createNewKey(PixRequest.toRequest(step1, request))
                 val result = pixRepository.save(step2.toPix(step1.instituicao!!.nome, step1.titular!!.id))
 
                 log.info("Pix created - {}", result.id)

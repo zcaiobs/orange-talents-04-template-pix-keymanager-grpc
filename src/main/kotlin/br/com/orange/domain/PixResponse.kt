@@ -1,20 +1,29 @@
 package br.com.orange.domain
 
+import io.micronaut.core.annotation.Introspected
 import java.time.LocalDateTime
 
-class PixResponse {
-    val keyType: KeyType? = null
-    val clienteId: String? = null
-    val key: String = ""
-    val bankAccount: BankAccount? = null
-    val owner: Owner? = null
-    val createdAt: LocalDateTime? = null
-
+@Introspected
+data class PixResponse(
+    val keyType: KeyType?,
+    val clienteId: String?,
+    val key: String,
+    val bankAccount: BankAccount?,
+    val owner: Owner?,
+    val createdAt: LocalDateTime?
+) {
     enum class KeyType {
         CPF, CNPJ, PHONE, EMAIL, RANDOM
     }
 
-    class BankAccount(var clienteId: String?, var nameBank: String?, var participant: String, var branch: String, var accountNumber: String, accountType: AccountType) {
+    class BankAccount(
+        var clienteId: String?,
+        var nameBank: String?,
+        var participant: String,
+        var branch: String,
+        var accountNumber: String,
+        accountType: AccountType
+    ) {
         var accountType: String = accountType.type
 
         enum class AccountType(var type: String) {
@@ -24,10 +33,6 @@ class PixResponse {
 
         fun toBank(name: String, clienteId: String): Pix.BankAccount {
             return Pix.BankAccount(clienteId, name, this.participant, this.branch, this.accountNumber, this.accountType)
-        }
-
-        override fun toString(): String {
-            return "BankAccount(participant='$participant', branch='$branch', accountNumber='$accountNumber', accountType='$accountType')"
         }
     }
 
@@ -42,18 +47,15 @@ class PixResponse {
         fun toOwner(): Pix.Owner {
             return Pix.Owner(this.name, this.taxIdNumber)
         }
-
-        override fun toString(): String {
-            return "Owner(name='$name', taxIdNumber='$taxIdNumber', type=$type)"
-        }
-    }
-
-    override fun toString(): String {
-        return "PixResponse(keyType=$keyType, key='$key', bankAccount='$bankAccount', " +
-                "owner='$owner', createdAt=$createdAt)"
     }
 
     fun toPix(name: String, clienteId: String): Pix {
-        return Pix(this.keyType!!.name, this.key, this.bankAccount!!.toBank(name, clienteId), this.owner!!.toOwner(), this.createdAt)
+        return Pix(
+            this.keyType!!.name,
+            this.key,
+            this.bankAccount!!.toBank(name, clienteId),
+            this.owner!!.toOwner(),
+            this.createdAt
+        )
     }
 }
