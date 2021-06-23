@@ -52,6 +52,7 @@ class RemoverChavePixTest {
         key.bankAccount?.clienteId = clientId
         key.bankAccount?.participant = participant
         key.keyvalue = keyValue
+
         val target = pixRepository.save(key)
         val res = pixRepository.findById(target.id).get()
 
