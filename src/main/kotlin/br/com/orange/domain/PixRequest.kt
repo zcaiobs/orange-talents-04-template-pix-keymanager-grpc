@@ -37,6 +37,32 @@ data class PixRequest(
             CONTA_CORRENTE("CACC"),
             CONTA_POUPANCA("SVGS")
         }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (javaClass != other?.javaClass) return false
+
+            other as BankAccount
+
+            if (participant != other.participant) return false
+            if (branch != other.branch) return false
+            if (accountNumber != other.accountNumber) return false
+            if (accountType != other.accountType) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            var result = participant.hashCode()
+            result = 31 * result + branch.hashCode()
+            result = 31 * result + accountNumber.hashCode()
+            result = 31 * result + accountType.hashCode()
+            return result
+        }
+
+        override fun toString(): String {
+            return "BankAccount(participant='$participant', branch='$branch', accountNumber='$accountNumber', accountType='$accountType')"
+        }
     }
 
     class Owner(var name: String, var taxIdNumber: String) {
@@ -45,6 +71,30 @@ data class PixRequest(
         enum class PersonType {
             NATURAL_PERSON,
             LEGAL_PERSON
+        }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (javaClass != other?.javaClass) return false
+
+            other as Owner
+
+            if (name != other.name) return false
+            if (taxIdNumber != other.taxIdNumber) return false
+            if (type != other.type) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            var result = name.hashCode()
+            result = 31 * result + taxIdNumber.hashCode()
+            result = 31 * result + type.hashCode()
+            return result
+        }
+
+        override fun toString(): String {
+            return "Owner(name='$name', taxIdNumber='$taxIdNumber', type=$type)"
         }
     }
 }
